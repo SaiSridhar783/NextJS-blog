@@ -13,7 +13,7 @@ const Hero = () => {
         />
       </div>
       <h1>Hi, I'm Sai Sridhar</h1>
-      <p>I blog about Anime and WebDev, mainly about Frontend</p>
+      <p>I blog about Anime and WebDev (mainly about Frontend)</p>
     </section>
   );
 };

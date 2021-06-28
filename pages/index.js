@@ -11,7 +11,7 @@ const HomePage = ({ posts }) => {
         <title>Sai's Blog</title>
         <meta
           name="description"
-          content="I post about Web Developmenmt and Anime"
+          content="I post about Web Development and Anime"
         />
       </Head>
       <Hero />

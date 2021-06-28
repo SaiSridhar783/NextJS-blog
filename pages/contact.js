@@ -7,7 +7,7 @@ const Contact = () => {
     <Fragment>
       <Head>
         <title>Contact Me</title>
-        <meta name="description" content="Contact me here" />
+        <meta name="description" content="Contact me here - Akula Sai Sridhar" />
       </Head>
       <ContactForm />
     </Fragment>

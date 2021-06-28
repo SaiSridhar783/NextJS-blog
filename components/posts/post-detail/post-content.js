@@ -4,12 +4,14 @@ import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
 import a11yDark from "react-syntax-highlighter/dist/cjs/styles/prism/a11y-dark";
 import js from "react-syntax-highlighter/dist/cjs/languages/prism/javascript";
 import css from "react-syntax-highlighter/dist/cjs/languages/prism/css";
+import html from "react-syntax-highlighter/dist/cjs/languages/prism/handlebars";
 
 import PostHeader from "./post-header";
 import classes from "./post-content.module.css";
 
 SyntaxHighlighter.registerLanguage("js", js);
 SyntaxHighlighter.registerLanguage("css", css);
+SyntaxHighlighter.registerLanguage("html", html);
 
 function PostContent(props) {
   const { post } = props;
@@ -54,6 +56,14 @@ function PostContent(props) {
         <SyntaxHighlighter language={language[1]} style={a11yDark}>
           {code.children[0]}
         </SyntaxHighlighter>
+      );
+    },
+
+    a: (a) => {
+      return (
+        <a target="_blank" href={a.href}>
+          {a.children}
+        </a>
       );
     },
   };
