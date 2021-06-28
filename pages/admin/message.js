@@ -46,7 +46,7 @@ const Message = (props) => {
   }
 
   return (
-    <div>
+    <div style={{padding: "1rem"}}>
       <HeadPage />
       {data.data.map((item) => {
         return (

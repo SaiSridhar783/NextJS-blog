@@ -73,13 +73,15 @@ button {
   color: #e0dee2;
   border-radius: 25px;
   box-shadow: 2px 4px 10px 2px #480264;
-  min-width: 400px;
+  min-width: 300px;
+  font-size: 0.8rem;
 }
 
 .display-message div {
   display: flex;
   align-items: baseline;
   justify-content: center;
+  padding: 0 0.5rem;
   width: 50%;
 }
 
@@ -91,5 +93,7 @@ button {
 
 .display-message p {
   font-size: 2rem;
-  font-family: sans-serif;
+  font-family:'Times New Roman', Times, serif;
+  text-shadow: 4px 3px 8px black;
+  padding: 0 1rem;
 }
