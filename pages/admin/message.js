@@ -123,19 +123,32 @@ const Message = (props) => {
               <img
                 src="/trash-fill.svg"
                 alt="delete"
+                style={{filter: "invert()"}}
                 onClick={() => deleteMessageHandler(item._id)}
               />
             </div>
-            <div>
-              <div>
-                Name:&nbsp;&nbsp;&nbsp; <h3>{item.name}</h3>
+            <div
+              style={{
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                backgroundColor: "#8438F783",
+                borderRadius: "25px"
+              }}
+            >
+              <div style={{width: "100%"}}>
+                <div>
+                  <span className="small-title">Name:&nbsp;&nbsp;&nbsp;</span>{" "}
+                  <h3>{item.name}</h3>
+                </div>
+                <div>
+                  <span className="small-title">Email:&nbsp;&nbsp;&nbsp;</span>{" "}
+                  <h3>{item.email}</h3>
+                </div>
               </div>
-              <div>
-                Email:&nbsp;&nbsp;&nbsp; <h3>{item.email}</h3>
-              </div>
-            </div>
 
-            <p>{item.message}</p>
+              <p>{item.message}</p>
+            </div>
           </div>
         );
       })}
