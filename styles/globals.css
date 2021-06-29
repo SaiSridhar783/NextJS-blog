@@ -93,7 +93,21 @@ button {
 
 .display-message p {
   font-size: 2rem;
-  font-family:'Times New Roman', Times, serif;
+  font-family: "Times New Roman", Times, serif;
   text-shadow: 4px 3px 8px black;
   padding: 0 1rem;
+}
+
+.display-message .top-display {
+  justify-content: space-between;
+  padding: 1% 4%;
+}
+
+.display-message .top-display img:hover {
+  transform: scale(1.5);
+  transition: all 300ms;
+}
+
+.display-message .top-display img {
+  transition: all 300ms;
 }

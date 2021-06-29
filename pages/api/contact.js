@@ -1,4 +1,5 @@
 import { MongoClient } from "mongodb";
+import { format } from "date-fns";
 
 async function handler(req, res) {
   if (req.method === "POST") {
@@ -20,6 +21,7 @@ async function handler(req, res) {
       email,
       name,
       message,
+      date: format(new Date(), "PPPppp"),
     };
 
     let client;

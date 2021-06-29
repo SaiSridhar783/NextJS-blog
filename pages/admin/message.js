@@ -1,5 +1,7 @@
 import useSWR from "swr";
 import Head from "next/head";
+import Notification from "../../components/ui/notification";
+import { useState } from "react";
 
 const HeadPage = () => (
   <Head>
@@ -8,6 +10,9 @@ const HeadPage = () => (
 );
 
 const Message = (props) => {
+  const [requestStatus, setRequestStatus] = useState();
+  const [requestError, setRequestError] = useState();
+
   if (props.hasError) {
     return (
       <div>
@@ -45,13 +50,82 @@ const Message = (props) => {
     );
   }
 
+  const deleteMessageHandler = async (messageId) => {
+    setRequestStatus("pending");
+    const response = await fetch("/api/message", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        messageId,
+      }),
+    }).then((resp) => resp.json());
+
+    const temp = response.resp.deletedCount;
+
+    if (temp === 0) {
+      setRequestStatus("error");
+      setRequestError("ID not found");
+    } else {
+      setRequestStatus("success");
+      /* window.location.reload() */
+    }
+  };
+
+  if (requestStatus === "success" || requestStatus === "error") {
+    const timer = setTimeout(() => {
+      setRequestError(null);
+      setRequestStatus(null);
+      clearTimeout(timer);
+    }, 3000);
+  }
+
+  let notification;
+
+  switch (requestStatus) {
+    case "pending":
+      notification = {
+        status: "pending",
+        title: "Sending Request...",
+        message: "Trying to delete Message!",
+      };
+      break;
+
+    case "success":
+      notification = {
+        status: "success",
+        title: "Success!",
+        message: "Message Deleted Successfully!",
+      };
+      break;
+
+    case "error":
+      notification = {
+        status: "error",
+        title: "Error!",
+        message: requestError,
+      };
+      break;
+
+    default:
+      null;
+  }
+
   return (
-    <div style={{padding: "1rem"}}>
+    <section style={{ padding: "1rem" }}>
       <HeadPage />
       {data.data.map((item) => {
         return (
           <div className="display-message" key={item._id}>
-            <h5>{item._id}</h5>
+            <div className="top-display">
+              <h5>{item.date}</h5>
+              <img
+                src="/trash-fill.svg"
+                alt="delete"
+                onClick={() => deleteMessageHandler(item._id)}
+              />
+            </div>
             <div>
               <div>
                 Name:&nbsp;&nbsp;&nbsp; <h3>{item.name}</h3>
@@ -65,7 +139,8 @@ const Message = (props) => {
           </div>
         );
       })}
-    </div>
+      {notification && <Notification {...notification} />}
+    </section>
   );
 };
 
