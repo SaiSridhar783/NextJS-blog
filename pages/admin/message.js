@@ -1,4 +1,4 @@
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
 import Head from "next/head";
 import Notification from "../../components/ui/notification";
 import { useState } from "react";
@@ -29,7 +29,9 @@ const Message = (props) => {
     return await response.json();
   };
 
-  const { data, error } = useSWR("/api/message", getData);
+  const { data, error } = useSWR("/api/message", getData, {
+    revalidateOnMount: true,
+  });
 
   if (!error && !data) {
     return (
@@ -69,6 +71,7 @@ const Message = (props) => {
       setRequestError("ID not found");
     } else {
       setRequestStatus("success");
+      mutate("/api/message");
       /* window.location.reload() */
     }
   };
@@ -123,7 +126,7 @@ const Message = (props) => {
               <img
                 src="/trash-fill.svg"
                 alt="delete"
-                style={{filter: "invert()"}}
+                style={{ filter: "invert()" }}
                 onClick={() => deleteMessageHandler(item._id)}
               />
             </div>
@@ -133,10 +136,10 @@ const Message = (props) => {
                 justifyContent: "center",
                 alignItems: "center",
                 backgroundColor: "#8438F783",
-                borderRadius: "25px"
+                borderRadius: "25px",
               }}
             >
-              <div style={{width: "100%"}}>
+              <div style={{ width: "100%" }}>
                 <div>
                   <span className="small-title">Name:&nbsp;&nbsp;&nbsp;</span>{" "}
                   <h3>{item.name}</h3>
