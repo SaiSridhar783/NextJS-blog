@@ -14,6 +14,15 @@ const Message = (props) => {
   const [requestStatus, setRequestStatus] = useState();
   const [requestError, setRequestError] = useState();
 
+  const getData = async (key) => {
+    const response = await fetch(key);
+    return await response.json();
+  };
+
+  const { data, error } = useSWR("/api/message", getData, {
+    revalidateOnMount: true,
+  });
+
   if (props.hasError) {
     return (
       <div>
@@ -24,15 +33,6 @@ const Message = (props) => {
       </div>
     );
   }
-
-  const getData = async (key) => {
-    const response = await fetch(key);
-    return await response.json();
-  };
-
-  const { data, error } = useSWR("/api/message", getData, {
-    revalidateOnMount: true,
-  });
 
   if (!error && !data) {
     return (
@@ -128,7 +128,9 @@ const Message = (props) => {
               <Image
                 src="/trash-fill.svg"
                 alt="delete"
-                style={{ filter: "invert()" }}
+                width={15}
+                height={15}
+                layout="intrinsic"
                 onClick={() => deleteMessageHandler(item._id)}
               />
             </div>

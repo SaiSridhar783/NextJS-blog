@@ -26,7 +26,7 @@ async function handler(req, res) {
 
     let client;
 
-    const databaseUrl = `mongodb://${process.env.mongodb_username}:${process.env.mongodb_password}@${process.env.mongodb_clustername}-shard-00-00.dipfo.mongodb.net:27017,${process.env.mongodb_clustername}-shard-00-01.dipfo.mongodb.net:27017,${process.env.mongodb_clustername}-shard-00-02.dipfo.mongodb.net:27017/${process.env.mongodb_database}?ssl=true&replicaSet=atlas-jzsi0n-shard-0&authSource=admin&retryWrites=true&w=majority`;
+    const databaseUrl = `mongodb+srv://${process.env.mongodb_username}:${process.env.mongodb_password}@cluster0.dipfo.mongodb.net/${process.env.mongodb_database}?retryWrites=true&w=majority`
 
     try {
       client = await MongoClient.connect(databaseUrl, {
