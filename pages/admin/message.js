@@ -53,26 +53,27 @@ const Message = (props) => {
   }
 
   const deleteMessageHandler = async (messageId) => {
-    setRequestStatus("pending");
-    const response = await fetch("/api/message", {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        messageId,
-      }),
-    }).then((resp) => resp.json());
+    if (window.confirm("Are you sure you want to delete this message?")) {
+      setRequestStatus("pending");
+      const response = await fetch("/api/message", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          messageId,
+        }),
+      }).then((resp) => resp.json());
 
-    const temp = response.resp.deletedCount;
+      const temp = response.resp.deletedCount;
 
-    if (temp === 0) {
-      setRequestStatus("error");
-      setRequestError("ID not found");
-    } else {
-      setRequestStatus("success");
-      mutate("/api/message");
-      /* window.location.reload() */
+      if (temp === 0) {
+        setRequestStatus("error");
+        setRequestError("ID not found");
+      } else {
+        setRequestStatus("success");
+        mutate("/api/message");
+      }
     }
   };
 
