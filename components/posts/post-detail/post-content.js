@@ -61,7 +61,7 @@ function PostContent(props) {
 
     a: (a) => {
       return (
-        <a target="_blank" href={a.href}>
+        <a target="_blank" rel="noreferrer" href={a.href}>
           {a.children}
         </a>
       );

@@ -8,7 +8,7 @@ const HomePage = ({ posts }) => {
   return (
     <Fragment>
       <Head>
-        <title>Sai's Blog</title>
+        <title>Sai&apos;s Blog</title>
         <meta
           name="description"
           content="I post about Web Development and Anime"
