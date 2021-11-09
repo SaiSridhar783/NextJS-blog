@@ -2,6 +2,7 @@ import useSWR, { mutate } from "swr";
 import Head from "next/head";
 import Notification from "../../components/ui/notification";
 import { useState } from "react";
+import Image from "next/image"
 
 const HeadPage = () => (
   <Head>
@@ -124,7 +125,7 @@ const Message = (props) => {
           <div className="display-message" key={item._id}>
             <div className="top-display">
               <h5>{item.date}</h5>
-              <img
+              <Image
                 src="/trash-fill.svg"
                 alt="delete"
                 style={{ filter: "invert()" }}
